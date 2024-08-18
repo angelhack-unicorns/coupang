@@ -1,4 +1,4 @@
-import UserIcon from './UI/icons/UserIcon';
+import Navbar from './components/Navbar';
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
       <div className='text-3xl font-bold text-center bg-red-500'>
         Hello World
       </div>
-      <UserIcon />
+      <Navbar />
     </>
   );
 }
