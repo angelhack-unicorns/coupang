@@ -1,10 +1,10 @@
 // global navbar on the bottom
 
-import HomeIcon from '../UI/icons/HomeIcon';
-import MenuIcon from '../UI/icons/MenuIcon';
-import SearchIcon from '../UI/icons/SearchIcon';
-import ShoppingCartIcon from '../UI/icons/ShoppingCartIcon';
-import UserIcon from '../UI/icons/UserIcon';
+import HomeIcon from './ui/icons/HomeIcon';
+import MenuIcon from './ui/icons/MenuIcon';
+import SearchIcon from './ui/icons/SearchIcon';
+import ShoppingCartIcon from './ui/icons/ShoppingCartIcon';
+import UserIcon from './ui/icons/UserIcon';
 
 export default function Navbar() {
   return (
