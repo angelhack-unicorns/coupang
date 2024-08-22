@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 export default function Layout() {
   return (
     <div>
-      <header className='header-image flex items-center justify-center mt-4'>
+      <header className='header-image flex items-center justify-center m-4'>
         <img src='header.png' width={101} height={24} />
       </header>
       <main>

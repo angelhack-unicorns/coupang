@@ -1,3 +1,3 @@
 export default function VoicePage() {
-  return <div>Voice page</div>;
+  return <p>Voice page</p>;
 }
