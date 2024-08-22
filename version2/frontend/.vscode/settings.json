@@ -1,0 +1,76 @@
+{
+    "workbench.colorCustomizations": {
+        "tab.inactiveBackground": "#000000",
+        "tab.activeBackground": "#0e0089",
+        "tab.hoverBackground": "#0e0089",
+        "activityBar.background": "#000000",
+        "sideBar.background": "#000000",
+        "sideBarSectionHeader.background": "#000000",
+        "editor.background": "#000000",
+        "editorSuggestWidget.selectedBackground": "#000074",
+        "editorBracketMatch.border": "#ffffff",
+        "editorGroupHeader.tabsBackground": "#000000",
+        "editorGutter.background": "#000000",
+        "breadcrumb.background": "#000000",
+        "statusBar.background": "#000000",
+        "editor.foreground": "#DDDDDD"
+    },
+    "workbench.colorTheme": "Firefox Dark",
+    "editor.minimap.enabled": false,
+    "editor.fontFamily": "\"Input Mono\"",
+    "editor.fontSize": 12.5,
+    "terminal.integrated.fontFamily": "Roboto Mono",
+    "terminal.integrated.fontSize": 14,
+    "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+    "vim.foldfix": true,
+    "git.openRepositoryInParentFolders": "never",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "workbench.layoutControl.enabled": false,
+    "window.commandCenter": false,
+    "workbench.sideBar.location": "right",
+    "window.zoomLevel": 2,
+    "go.toolsManagement.autoUpdate": true,
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--fast"
+    ],
+    // "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "always"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.requireConfig": true,
+    "eslint.enable": true,
+    "eslint.format.enable": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+    ],
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "[html]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "[javascript]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+}

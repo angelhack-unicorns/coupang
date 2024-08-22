@@ -1,0 +1,5 @@
+* add the url to the coupang product page
+* test images with simple functionality like identifying the object
+* define the logic for synchronizing prompt generation and image upload
+* handle authentication
+* deploy to aws ec2
