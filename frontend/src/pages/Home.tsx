@@ -4,30 +4,31 @@ import HandbagIcon from '../components/ui/icons/HandbagIcon';
 import { Button } from '../components/ui';
 import MicrophoneIcon from '../components/ui/icons/MicrophoneIcon';
 import { useNavigate } from 'react-router-dom';
-
 export default function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <main className='grid gap-y-2'>
-      {/* search and microphone inputs */}
-      <span className='flex mx-4 gap-x-2'>
-        <SearchField
-          aria-label='Search'
-          placeholder='구팡에서 검색하세요!'
-          className='w-full'
-        />
-        <Button
-          intent='secondary'
-          onPress={() => {
-            navigate('/voice');
-          }}
-        >
-          <MicrophoneIcon />
-        </Button>
-      </span>
-      {/* scrollable content */}
-      <div className='overflow-y-auto' style={{ maxHeight: '80vh' }}>
+    <main className='flex flex-col h-full'>
+      {/* Fixed search and microphone inputs */}
+      <div className='flex-shrink-0 mx-4 mb-2'>
+        <span className='flex gap-x-2'>
+          <SearchField
+            aria-label='Search'
+            placeholder='구팡에서 검색하세요!'
+            className='w-full'
+          />
+          <Button
+            intent='secondary'
+            onPress={() => {
+              navigate('/voice');
+            }}
+          >
+            <MicrophoneIcon />
+          </Button>
+        </span>
+      </div>
+      {/* Scrollable content */}
+      <div className='flex-grow overflow-y-auto'>
         <AdsCarousel />
 
         {/* quicklinks section (placeholder) */}
