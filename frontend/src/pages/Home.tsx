@@ -3,20 +3,30 @@ import AdsCarousel from '../components/AdsCarousel';
 import HandbagIcon from '../components/ui/icons/HandbagIcon';
 import { Button } from '../components/ui';
 import MicrophoneIcon from '../components/ui/icons/MicrophoneIcon';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <main className='grid gap-y-2'>
+      {/* search and microphone inputs */}
       <span className='flex mx-4 gap-x-2'>
         <SearchField
           aria-label='Search'
           placeholder='구팡에서 검색하세요!'
           className='w-full'
         />
-        <Button intent='secondary'>
+        <Button
+          intent='secondary'
+          onPress={() => {
+            navigate('/voice');
+          }}
+        >
           <MicrophoneIcon />
         </Button>
       </span>
+      {/* scrollable content */}
       <div className='overflow-y-auto' style={{ maxHeight: '80vh' }}>
         <AdsCarousel />
 
