@@ -1,20 +1,21 @@
-//@ts-nocheck
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '../components/ui';
 import PauseIcon from '../components/ui/icons/PauseIcon';
 import PlayIcon from '../components/ui/icons/PlayIcon';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
 
-const OscillatingDots = ({ audioData }) => {
+interface BouncingDotsProps {
+  audioData: Uint8Array;
+}
+
+const BouncingDots: React.FC<BouncingDotsProps> = ({ audioData }) => {
   return (
-    <div className='flex space-x-3'>
+    <div className='flex items-center space-x-3'>
       {[0, 1, 2, 3].map((i) => (
         <div
           key={i}
           className='w-3 h-3 bg-gray-400 rounded-full transition-all duration-75 ease-in-out'
           style={{
-            transform: `scale(${1 + audioData[i] / 128})`,
             opacity: 0.3 + audioData[i] / 256,
           }}
         />
@@ -25,9 +26,9 @@ const OscillatingDots = ({ audioData }) => {
 
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(false);
-  const [audioData, setAudioData] = useState(new Uint8Array(4));
-  const analyzerRef = useRef(null);
-  const animationRef = useRef(null);
+  const [audioData, setAudioData] = useState<Uint8Array>(new Uint8Array(4));
+  const analyzerRef = useRef<AnalyserNode | null>(null);
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (isListening) {
@@ -41,8 +42,7 @@ export default function VoicePage() {
   const startListening = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const audioContext = new (window.AudioContext ||
-        window.webkitAudioContext)();
+      const audioContext = new (window.AudioContext || window.AudioContext)();
       const source = audioContext.createMediaStreamSource(stream);
       const analyzer = audioContext.createAnalyser();
       analyzer.fftSize = 32;
@@ -65,10 +65,12 @@ export default function VoicePage() {
   };
 
   const updateAudioData = () => {
-    const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
-    analyzerRef.current.getByteFrequencyData(dataArray);
-    setAudioData(dataArray.slice(0, 4));
-    animationRef.current = requestAnimationFrame(updateAudioData);
+    if (analyzerRef.current) {
+      const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
+      analyzerRef.current.getByteFrequencyData(dataArray);
+      setAudioData(dataArray.slice(0, 4));
+      animationRef.current = requestAnimationFrame(updateAudioData);
+    }
   };
 
   return (
@@ -82,7 +84,7 @@ export default function VoicePage() {
         >
           {isListening ? <PauseIcon /> : <PlayIcon />}
         </Button>
-        <OscillatingDots audioData={audioData} />
+        <BouncingDots audioData={audioData} />
         <Button intent='danger' shape='circle' className='w-16 h-16'>
           <XMarkIcon />
         </Button>
