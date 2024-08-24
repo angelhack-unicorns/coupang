@@ -11,6 +11,7 @@ import { useSpeechRecognition } from '../api/useSpeechRecognition';
 import { useSubmitUserMessage } from '../api/fetch-scraper-data';
 import 'ldrs/mirage';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
+import { useNavigate } from 'react-router-dom';
 
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
@@ -18,6 +19,7 @@ export default function VoicePage() {
   const [isLoading, setIsLoading] = useState(false);
   const { text, startListening, stopListening, error } = useSpeechRecognition();
   const submitMessage = useSubmitUserMessage();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isListening) {
@@ -57,8 +59,12 @@ export default function VoicePage() {
 
   return (
     <>
-      <div className='flex items-center justify-center'>
-        <XMarkIcon className='' />
+      <div className='grid grid-cols-3'>
+
+        <button onClick={() => navigate("/")} className="ml-5">
+          <XMarkIcon className='' />
+        </button>
+
         <CoupangLogoImage />
       </div>
       <div className='flex flex-col justify-between h-full bg-white'>
