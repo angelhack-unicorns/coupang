@@ -25,7 +25,7 @@ are important because they train multiple parts of the body
 that make you look bigger and stronger.
 
 The number of items you should include in your response should
-be 10.
+be 5.
 """
 
 user_message_video = """
@@ -36,7 +36,7 @@ already have. And if possible, you should try to include
 alternative items.
 
 The number of items you should include in your response should
-be 10.
+be 5.
 """
 
 class CatalogueItem(BaseModel):
