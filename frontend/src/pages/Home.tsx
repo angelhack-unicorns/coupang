@@ -60,25 +60,9 @@ export default function HomePage() {
   ];
 
   return (
-    <main className='flex flex-col h-full'>
+    <article className='flex flex-col h-full'>
       {/* Fixed search and microphone inputs */}
-      <div className='flex-shrink-0 mx-4 mb-2'>
-        <span className='flex gap-x-2'>
-          <SearchField
-            aria-label='Search'
-            placeholder='구팡에서 검색하세요!'
-            className='w-full'
-          />
-          <Button
-            intent='secondary'
-            onPress={() => {
-              navigate('/voice');
-            }}
-          >
-            <MicrophoneIcon />
-          </Button>
-        </span>
-      </div>
+      {/*  */}
       {/* Scrollable content */}
       <div className='flex-grow overflow-y-auto'>
         <AdsCarousel />
@@ -128,6 +112,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-    </main>
+    </article>
   );
 }
