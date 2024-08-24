@@ -11,6 +11,7 @@ import CartContainer from '../components/CartContainer';
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
   const [text, setText] = useState<string>('Listening...');
+  const [isCart, setIsCart] = useState(false);
 
   useEffect(() => {
     if (isListening) {
@@ -44,7 +45,6 @@ export default function VoicePage() {
     await SpeechRecognition.stop();
   };
 
-  const isCart = true;
 
   return (
     <>
