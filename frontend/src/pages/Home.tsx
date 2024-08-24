@@ -1,12 +1,7 @@
-import { SearchField } from '../components/ui/search-field';
 import AdsCarousel from '../components/AdsCarousel';
 import HandbagIcon from '../components/ui/icons/HandbagIcon';
-import { Button } from '../components/ui';
-import MicrophoneIcon from '../components/ui/icons/MicrophoneIcon';
-import { useNavigate } from 'react-router-dom';
-export default function HomePage() {
-  const navigate = useNavigate();
 
+export default function HomePage() {
   const quickLinksImgs: string[] = [
     '/quicklinks/4siganman.png',
     '/quicklinks/camera.png',

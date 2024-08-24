@@ -12,12 +12,19 @@ export default function Layout() {
 
   return (
     <div
-      className={`min-h-screen flex flex-col ${isVoicePage ? 'bg-black overflow-hidden' : 'bg-white'
-        }`}
+      className={`min-h-screen flex flex-col ${
+        isVoicePage ? 'bg-black overflow-hidden' : 'bg-white'
+      }`}
     >
-      <header className='sticky top-0 z-10 bg-white header-image flex flex-col items-center justify-center px-4'>
-        <img src='header.png' width={101} height={24} alt='Header' className="m-2" />
-        <div className='flex-shrink-0 mb-2  w-full' >
+      <header className='sticky top-0 z-10 header-image flex flex-col items-center justify-center px-4'>
+        <img
+          src='header.png'
+          width={101}
+          height={24}
+          alt='Header'
+          className='m-2'
+        />
+        <div className='flex-shrink-0 mb-2  w-full'>
           <span className='flex gap-x-2 w-full'>
             <SearchField
               aria-label='Search'
