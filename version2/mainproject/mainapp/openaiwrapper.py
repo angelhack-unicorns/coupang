@@ -55,7 +55,7 @@ class OpenAIWrapper:
     self.client = OpenAI(api_key=API_KEY)
   def handle_user_message(self, user_message):
     completion = self.client.beta.chat.completions.parse(
-      model="gpt-4o-2024-08-06",
+      model="gpt-4o-mini",
       messages=[
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_message}
@@ -65,7 +65,7 @@ class OpenAIWrapper:
     return completion.choices[0].message.content
   def send_image(self, image_base64):
     completion = self.client.beta.chat.completions.parse(
-      model="gpt-4o-2024-08-06",
+      model="gpt-4o-mini",
       messages=[
         {"role": "user", "content": [
           {
@@ -90,7 +90,7 @@ class OpenAIWrapper:
     assistant_message
   ):
     completion = self.client.beta.chat.completions.parse(
-      model="gpt-4o-2024-08-06",
+      model="gpt-4o-mini",
       messages=[
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_message},
