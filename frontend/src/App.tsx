@@ -25,6 +25,10 @@ export default function App() {
           path: '/test',
           element: <TestPage />,
         },
+        {
+          path: '/login',
+          element: <LoginPage />
+        }
       ],
     },
   ]);
