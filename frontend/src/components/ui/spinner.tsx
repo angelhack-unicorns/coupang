@@ -1,31 +1,44 @@
 export default function Spinner() {
   return (
     <>
-      <div className='container'>
-        <div className='dot' />
-        <div className='dot' />
-        <div className='dot' />
-        <div className='dot' />
-        <div className='dot' />
-      </div>
-      <svg width={0} height={0} className='svg'>
-        <defs>
-          <filter id='uib-jelly-ooze'>
-            <feGaussianBlur in='SourceGraphic' stdDeviation={3} result='blur' />
-            <feColorMatrix
-              in='blur'
-              mode='matrix'
-              values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7'
-              result='ooze'
-            />
-            <feBlend in='SourceGraphic' in2='ooze' />
-          </filter>
-        </defs>
-      </svg>
-      <style>{`
+      <div className='spinner-wrapper'>
+        <div className='container'>
+          <div className='dot' />
+          <div className='dot' />
+          <div className='dot' />
+          <div className='dot' />
+          <div className='dot' />
+        </div>
+        <svg width={0} height={0} className='svg'>
+          <defs>
+            <filter id='uib-jelly-ooze'>
+              <feGaussianBlur
+                in='SourceGraphic'
+                stdDeviation={3}
+                result='blur'
+              />
+              <feColorMatrix
+                in='blur'
+                mode='matrix'
+                values='1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7'
+                result='ooze'
+              />
+              <feBlend in='SourceGraphic' in2='ooze' />
+            </filter>
+          </defs>
+        </svg>
+        <style>{`
+        
+        .spinner-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          width: 100%;
+        }
         .container {
           --uib-size: 60px;
-          --uib-color: black;
+          --uib-color: white;
           --uib-speed: 2.6s;
           --uib-dot-size: calc(var(--uib-size) * 0.23);
           position: relative;
@@ -81,6 +94,7 @@ export default function Spinner() {
           }
         }
       `}</style>
+      </div>
     </>
   );
 }
