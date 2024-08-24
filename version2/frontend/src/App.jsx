@@ -53,14 +53,17 @@ const App = () => {
 
   const handleSubmitPrompt = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/user-message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        'http://localhost:8000/api/e9dyi1qp04w57b5q98hwmwx8/user-message',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ user_message: prompt }),
         },
-        body: JSON.stringify({ user_message: prompt }),
-      });
+      );
       if (response.ok) {
         const fetchedPromptResponse = await response.text();
         setPromptResponse(fetchedPromptResponse);
@@ -93,13 +96,16 @@ const App = () => {
     const formData = new FormData();
     formData.append('image', image);
     try {
-      const response = await fetch('http://localhost:8000/api/image-upload', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        'http://localhost:8000/api/e9dyi1qp04w57b5q98hwmwx8/image-upload',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
         },
-        body: formData,
-      });
+      );
       if (response.ok) {
         const fetchedPromptResponse = await response.text();
         setImagePromptResponse(fetchedPromptResponse);
