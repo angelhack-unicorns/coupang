@@ -12,6 +12,7 @@ import { useSubmitUserMessage } from '../api/fetch-scraper-data';
 import 'ldrs/mirage';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
 import { useNavigate } from 'react-router-dom';
+import AudioRecommendations from './AudioRecommendations';
 
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
@@ -75,9 +76,7 @@ export default function VoicePage() {
             <AudioPlaceholder />
           )
         ) : (
-          <pre className='text-black p-4 overflow-auto max-h-[calc(100vh-200px)]'>
-            {JSON.stringify(submitMessage.data, null, 2)}
-          </pre>
+          <AudioRecommendations items = {submitMessage.data?.items}/>
         )}
         <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
           {error ? (

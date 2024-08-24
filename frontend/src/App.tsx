@@ -7,8 +7,6 @@ import CameraPage from './pages/Camera';
 import CameraRecommendationsPage from './pages/CameraRecommendations';
 
 // import TestPage from './pages/Test';
-import TestRecommendationsPage from './pages/TestRecommendations';
-
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -38,8 +36,8 @@ export default function App() {
         //   element: <TestPage />,
         // },
         {
-          path: '/testrecommendations',
-          element: <TestRecommendationsPage />,
+          // path: '/testrecommendations',
+          // element: <TestRecommendationsPage  data={}/>,
         },
       ],
     },
