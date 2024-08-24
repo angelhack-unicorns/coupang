@@ -14,7 +14,6 @@ export default function CameraComponent() {
   };
 
 
-
   return (
     <div className='flex flex-col'>
       <Webcam style={{ borderRadius: '0%' }} audio={false} ref={webcamRef} videoConstraints={videoConstraints}></Webcam>
