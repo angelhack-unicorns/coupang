@@ -6,6 +6,7 @@ import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import VoiceNav from '../components/VoiceNav';
 import CameraComponent from '../components/CameraComponent';
 import AudioPlaceholder from '../components/ui/audioPlaceholder';
+import CartContainer from '../components/CartContainer';
 
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
@@ -43,11 +44,13 @@ export default function VoicePage() {
     await SpeechRecognition.stop();
   };
 
+  const isCart = true;
+
   return (
     <>
       <VoiceNav />
       <div className='flex flex-col justify-between h-full bg-white'>
-        {isListening ? (
+        {isListening ? (!isCart ?
           <>
             <AudioPlaceholder />
             <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
@@ -63,9 +66,25 @@ export default function VoicePage() {
               </Button>
             </div>
           </>
-        ) : (
-          <CameraComponent />
-        )}
+          : (
+            <>
+              <CartContainer />
+              <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
+                <text className='text-black mb-4 font-inter font-light'>
+                  {text}
+                </text>
+                <Button
+                  shape='circle'
+                  className='w-16 h-16 bg-[#3369FD]'
+                  onPress={() => setIsListening(!isListening)}
+                >
+                  {isListening ? <PauseIcon /> : <PlayIcon />}
+                </Button>
+              </div>
+            </>))
+          : (
+            <CameraComponent />
+          )}
       </div>
     </>
   );
