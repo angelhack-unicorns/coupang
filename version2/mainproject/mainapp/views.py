@@ -65,6 +65,30 @@ def upload_image(request, image: UploadedFile = File(...)):
   base64_image = encode_image_file(image)
   ai_response_json = openai_wrapper.handle_image_upload(base64_image, user_db.user_message, user_db.assistant_message)
   ai_response = json.loads(ai_response_json)
+
+  for i in range(len(ai_response["items"])):
+    ai_response["items"][i]["name"] = ai_response["items"][i]["name"].lower()
+  
+  items = []
+  for item in ai_response["items"]:
+    item = item["name"].replace(" ", "+")
+    items.append(item) 
+  items_text = " ".join(items)
+
+  print("items_text: ", items_text)
+  
+  response = requests.get(f"http://localhost:8080/request", data=items_text)
+  response_json = response.json()
+  
+  print("response_json: ", response_json)
+
+  for response_item in response_json:
+    print(response_item)
+    for index, ai_item in enumerate(ai_response["items"]):
+      if ai_item["name"] == response_item["item"].replace("+", " "):
+        response_item_json = json.loads(response_item["item_info_json"])
+        ai_response["items"][index]["coupang_info"] = response_item_json
+  
   return ai_response
 
 @api.get("/hello")
