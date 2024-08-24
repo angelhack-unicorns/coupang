@@ -2,6 +2,7 @@ import BackButton from '../components/ui/icons/BackButton';
 import CameraIcon from '../components/ui/icons/CameraIcon';
 import CartItem from '../components/CartItem';
 import { useNavigate } from 'react-router-dom';
+import CameraNavIcon from '../components/ui/icons/CameraNavIcon';
 
 interface CoupangInfo {
   product_url: string;
@@ -23,7 +24,7 @@ export default function AudioRecommendations({ items }: { items: Item[] }) {
     <>
       <div className='flex mt-0 mb-2 w-full px-2 text-black justify-between'>
         <BackButton onClick={() => {navigate(-1)}} className='mr-auto ml-2' />
-        <CameraIcon onClick={() => { navigate("/voice/camera/") }} className='mr-2 ml-auto' stroke="black" />
+        <CameraNavIcon onClick={() => { navigate("/voice/camera/") }} className='mr-2 ml-auto' stroke="white" fill='white'/>
       </div>
       <hr className="my-0 h-0.5 border-t-0 bg-neutral-300 dark:bg-white/10" />
       <div className="h-96 overflow-auto space-y-2">
