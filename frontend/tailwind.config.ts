@@ -16,6 +16,25 @@ const config = withTV({
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
+      keyframes: {
+        expandL: {
+          '0%, 100%': { width: '280px', height:"280px" },
+          '50%': { width: '320px', height:"320px" },
+        },
+        expandM: {
+          '0%, 100%': { width: '180px', height:"180px" },
+          '50%': { width: '220px', height:"220px" },
+        },
+        expandS: {
+          '0%, 100%': { width: '130px', height:"130px" },
+          '50%': { width: '170px', height:"170px" },
+        },
+      },
+      animation: {
+        expandl: 'expandL 3s ease-in-out infinite',
+        expandm: 'expandM 3s ease-in-out infinite',
+        expands: 'expandS 3s ease-in-out infinite',
+      },
       colors: {
         light: 'hsl(var(--light))',
         dark: 'hsl(var(--dark))',
@@ -25,6 +44,9 @@ const config = withTV({
         toggle: 'hsl(var(--toggle))',
         bg: 'hsl(var(--bg))',
         fg: 'hsl(var(--fg))',
+        coupang_green:"#008C00",
+        coupang_discount:"#ae0000",
+        coupang_star:"#FFBF00",
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           fg: 'hsl(var(--primary-fg))',
