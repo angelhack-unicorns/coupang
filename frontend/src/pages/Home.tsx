@@ -3,17 +3,17 @@ import HomeNav from '../components/HomeNav';
 import HandbagIcon from '../components/ui/icons/HandbagIcon';
 
 export default function HomePage() {
-  const quickLinksImgs: string[] = [
-    '/quicklinks/4siganman.png',
-    '/quicklinks/camera.png',
-    '/quicklinks/fashion_e.png',
-    '/quicklinks/lemon.png',
-    '/quicklinks/makeup.png',
-    '/quicklinks/omp-promotion.png',
-    '/quicklinks/rocketdelivery.png',
-    '/quicklinks/shampoo.png',
-    '/quicklinks/sofa.png',
-    '/quicklinks/warehouse_icon.png',
+  const quickLinksImgs = [
+    { img: '/quicklinks/4siganman.png', desc: '지금할인중' },
+    { img: '/quicklinks/camera.png', desc: '참고할인' },
+    { img: '/quicklinks/fashion_e.png', desc: '판매자 특가' },
+    { img: '/quicklinks/lemon.png', desc: '로켓배송' },
+    { img: '/quicklinks/makeup.png', desc: '패셩/잡화' },
+    { img: '/quicklinks/omp-promotion.png', desc: '홈데코/취미' },
+    { img: '/quicklinks/rocketdelivery.png', desc: '가전디지털' },
+    { img: '/quicklinks/shampoo.png', desc: '식품' },
+    { img: '/quicklinks/sofa.png', desc: '생활용품' },
+    { img: '/quicklinks/warehouse_icon.png', desc: '뷰티' },
   ];
 
   const shopObjList = [
@@ -71,9 +71,9 @@ export default function HomePage() {
           <div className='grid grid-rows-2 grid-cols-5 gap-1 p-2'>
             {quickLinksImgs.map((src: string, i: number) => (
               <div key={i} className='w-full aspect-square'>
-                <img src={`${src}`} className='h-12 w-12 mx-auto' />
+                <img src={`${src.img}`} className='h-12 w-12 mx-auto' />
                 <div className=' flex justify-center'>
-                  <p className='text-sm'> 지금 할인중 </p>
+                  <p className='text-sm'> {src.desc} </p>
                 </div>
               </div>
             ))}
