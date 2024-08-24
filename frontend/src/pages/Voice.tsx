@@ -69,14 +69,10 @@ export default function VoicePage() {
         <CoupangLogoImage />
       </div>
       <div className='flex flex-col justify-between h-full bg-white'>
-        {isListening ? (
-          isCart ? (
-            <CartContainer />
-          ) : (
-            <AudioPlaceholder />
-          )
+        {isListening ||!submitMessage.data?.items ? (
+          <AudioPlaceholder />
         ) : (
-          <AudioRecommendations items = {submitMessage.data?.items}/>
+          <AudioRecommendations items={submitMessage.data?.items} />
         )}
         <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
           {error ? (

@@ -1,10 +1,10 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Webcam from 'react-webcam'
-import { Button } from './ui';
-import CameraIcon from './ui/icons/CameraIcon';
+import { Button } from '../components/ui';
+import CameraIcon from '../components/ui/icons/CameraIcon';
 
-export default function CameraComponent() {
+export default function CameraPage() {
   const webcamRef = useRef(null);
   const [camDirection, setCameraDirection] = useState("user")
 

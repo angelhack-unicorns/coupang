@@ -3,10 +3,9 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Layout from './pages/Layout';
 import HomePage from './pages/Home';
 import VoicePage from './pages/Voice';
-import CameraPage from './pages/Camera';
 import CameraRecommendationsPage from './pages/CameraRecommendations';
+import CameraPage from './pages/CameraPage';
 
-// import TestPage from './pages/Test';
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -25,20 +24,16 @@ export default function App() {
         },
         {
           path: '/voice/camera',
-          element: <CameraPage />,
+          element: <CameraPage/>,
         },
         {
           path: '/voice/camera/recommendations',
           element: <CameraRecommendationsPage />,
         },
         // {
-        //   path: '/test',
-        //   element: <TestPage />,
+        //   path: '/testrecommendations',
+        //   element: <TestRecommendationsPage  data={}/>,
         // },
-        {
-          // path: '/testrecommendations',
-          // element: <TestRecommendationsPage  data={}/>,
-        },
       ],
     },
   ]);
