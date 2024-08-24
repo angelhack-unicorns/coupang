@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { Button } from '../components/ui';
 import PauseIcon from '../components/ui/icons/PauseIcon';
 import PlayIcon from '../components/ui/icons/PlayIcon';
-import CameraComponent from '../components/CameraComponent';
+// import CameraComponent from '../components/CameraComponent';
 import AudioPlaceholder from '../components/ui/audioPlaceholder';
 import CartContainer from '../components/CartContainer';
 import CoupangLogoImage from '../components/VoiceNav';
 import { useSpeechRecognition } from '../api/useSpeechRecognition';
+import CartContainerSkeleton from '../components/CartContainerSkeleton';
 
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
@@ -44,7 +45,8 @@ export default function VoicePage() {
             <AudioPlaceholder />
           )
         ) : (
-          <CameraComponent />
+          <CartContainerSkeleton />
+          // <CameraComponent />
         )}
         <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
           {isLoading ? (

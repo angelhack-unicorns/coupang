@@ -1,10 +1,19 @@
-import { useSubmitUserMessage } from '../api/fetch-categories';
+import { useSubmitUserMessage } from '../api/fetch-scraper-data';
 import { useState } from 'react';
+import { Card } from '../components/ui/card';
+
+interface CoupangInfo {
+  product_url: string;
+  src: string;
+  name: string;
+  price: string;
+}
 
 interface Item {
   name: string;
   category: string;
   reason_for_inclusion: string;
+  coupang_info: CoupangInfo[];
 }
 
 export default function TestRecommendationsPage() {
@@ -38,13 +47,39 @@ export default function TestRecommendationsPage() {
         Submit
       </button>
       {submitMessage.isPending && <p>Submitting...</p>}
-      <div className='mt-4'>
+      <div className='mt-4 space-y-6'>
         {response.map((item, index) => (
-          <div key={index} className='mb-4 p-4 border rounded'>
-            <h3 className='font-bold'>{item.name}</h3>
-            <p>Category: {item.category}</p>
-            <p>{item.reason_for_inclusion}</p>
-          </div>
+          <Card key={index} className='p-4'>
+            <Card.Header>
+              <Card.Title>{item.name}</Card.Title>
+              <Card.Description>Category: {item.category}</Card.Description>
+            </Card.Header>
+            <Card.Content>
+              <p className='mb-4'>{item.reason_for_inclusion}</p>
+              <h4 className='font-semibold mb-2'>Coupang Products:</h4>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+                {item.coupang_info.map((product, productIndex) => (
+                  <a
+                    key={productIndex}
+                    href={product.product_url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='block border rounded p-2 hover:shadow-md transition-shadow'
+                  >
+                    <img
+                      src={product.src}
+                      alt={product.name}
+                      className='w-full h-32 object-cover mb-2'
+                    />
+                    <p className='text-sm font-medium truncate'>
+                      {product.name}
+                    </p>
+                    <p className='text-sm text-blue-600'>{product.price}</p>
+                  </a>
+                ))}
+              </div>
+            </Card.Content>
+          </Card>
         ))}
       </div>
     </div>
