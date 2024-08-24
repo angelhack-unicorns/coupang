@@ -13,6 +13,9 @@ const config = withTV({
       },
     },
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
       colors: {
         light: 'hsl(var(--light))',
         dark: 'hsl(var(--dark))',

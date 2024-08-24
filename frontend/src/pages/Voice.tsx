@@ -1,40 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '../components/ui';
 import PauseIcon from '../components/ui/icons/PauseIcon';
 import PlayIcon from '../components/ui/icons/PlayIcon';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import VoiceNav from '../components/VoiceNav';
-import CameraIcon from '../components/ui/icons/CameraIcon';
+import CameraComponent from '../components/CameraComponent';
+import AudioPlaceholder from '../components/ui/audioPlaceholder';
 
-interface BouncingDotsProps {
-  audioData: Uint8Array;
-}
-
-const BouncingDots: React.FC<BouncingDotsProps> = ({ audioData }) => {
-  return (
-    <div className='flex items-center space-x-3'>
-      {[0, 1, 2, 3].map((i) => (
-        <div
-          key={i}
-          className='w-3 h-3 bg-gray-400 rounded-full transition-all duration-75 ease-in-out'
-          style={{
-            opacity: 0.3 + audioData[i] / 256,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
 
 export default function VoicePage() {
-  const [isListening, setIsListening] = useState(false);
-  const [audioData, setAudioData] = useState<Uint8Array>(new Uint8Array(4));
-  const analyzerRef = useRef<AnalyserNode | null>(null);
-  const animationRef = useRef<number | null>(null);
+  const [isListening, setIsListening] = useState(true);
+  const [text, setText] = useState<string>()
 
   useEffect(() => {
     if (isListening) {
+      console.log("is listening");
       listen();
     } else {
       stop();
@@ -55,6 +36,7 @@ export default function VoicePage() {
 
     SpeechRecognition.addListener('partialResults', (result: any) => {
       const transcribedText = result.transcriptions[0];
+      setText(transcribedText)
       console.log('Transcribed text:', transcribedText);
     });
   };
@@ -63,40 +45,64 @@ export default function VoicePage() {
     await SpeechRecognition.stop();
   };
 
-  const updateAudioData = () => {
-    if (analyzerRef.current) {
-      const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
-      analyzerRef.current.getByteFrequencyData(dataArray);
-      setAudioData(dataArray.slice(0, 4));
-      animationRef.current = requestAnimationFrame(updateAudioData);
-    }
-  };
+ 
 
   return (
     <>
       <VoiceNav />
-      <div className='flex flex-col justify-between h-full'>
-        {/* AI Section */}
-        <div className='h-96 w-full rounded-t-3xl bg-gradient-to-b from-[#45D9FA] to-[#88CC2E] flex justify-end p-4'>
-          <CameraIcon />
-        </div>
-
-        {/* bottom control buttons */}
-        <div className='flex justify-around w-full absolute bottom-32'>
-          <Button
-            // intent='light/dark'
-            shape='circle'
-            className='w-16 h-16 bg-[#3369FD]'
-            onPress={() => setIsListening(!isListening)}
-          >
-            {isListening ? <PauseIcon /> : <PlayIcon />}
-          </Button>
-          <BouncingDots audioData={audioData} />
-          <Button intent='danger' shape='circle' className='w-16 h-16'>
-            <XMarkIcon />
-          </Button>
-        </div>
+      <div className='flex flex-col justify-between h-full bg-white'>
+        {isListening ?
+          <>
+            <AudioPlaceholder />
+            <div className='flex justify-around w-full items-center absolute bottom-32'>
+              <Button
+                shape='circle'
+                className='w-16 h-16 bg-[#3369FD]'
+                onPress={() => setIsListening(!isListening)}
+              >
+                {isListening ? <PauseIcon /> : <PlayIcon />}
+              </Button>
+              <div>
+                <text className='text-black mt-18 font-inter font-light'>Listening..</text>
+              </div>
+              <Button intent='danger' shape='circle' className='w-16 h-16'>
+                <XMarkIcon/>
+              </Button>
+            </div>
+          </>
+          :
+          <CameraComponent />
+        }
       </div>
     </>
   );
 }
+
+
+
+
+// const updateAudioData = () => {
+//   if (analyzerRef.current) {
+//     const dataArray = new Uint8Array(analyzerRef.current.frequencyBinCount);
+//     analyzerRef.current.getByteFrequencyData(dataArray);
+//     setAudioData(dataArray.slice(0, 4));
+//     animationRef.current = requestAnimationFrame(updateAudioData);
+//   }
+// };
+
+
+// const BouncingDots: React.FC<BouncingDotsProps> = ({ audioData }) => {
+//   return (
+//     <div className='flex items-center space-x-3'>
+//       {[0, 1, 2, 3].map((i) => (
+//         <div
+//           key={i}
+//           className='w-3 h-3 bg-gray-400 rounded-full transition-all duration-75 ease-in-out'
+//           style={{
+//             opacity: 0.3 + audioData[i] / 256,
+//           }}
+//         />
+//       ))}
+//     </div>
+//   );
+// };
