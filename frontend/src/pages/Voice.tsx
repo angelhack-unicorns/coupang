@@ -3,6 +3,7 @@ import { Button } from '../components/ui';
 import PauseIcon from '../components/ui/icons/PauseIcon';
 import PlayIcon from '../components/ui/icons/PlayIcon';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
+import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 
 interface BouncingDotsProps {
   audioData: Uint8Array;
@@ -32,37 +33,38 @@ export default function VoicePage() {
 
   useEffect(() => {
     if (isListening) {
-      startListening();
+      listen()
+
     } else {
-      stopListening();
+      stop()
     }
-    return () => stopListening();
+    // return () => stop(); //stoplistening
   }, [isListening]);
 
-  const startListening = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const audioContext = new (window.AudioContext || window.AudioContext)();
-      const source = audioContext.createMediaStreamSource(stream);
-      const analyzer = audioContext.createAnalyser();
-      analyzer.fftSize = 32;
-      source.connect(analyzer);
-      analyzerRef.current = analyzer;
-      updateAudioData();
-    } catch (error) {
-      console.error('Error accessing microphone:', error);
-    }
-  };
 
-  const stopListening = () => {
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
-    if (analyzerRef.current) {
-      analyzerRef.current.disconnect();
-      analyzerRef.current = null;
-    }
-  };
+  const listen = async () => {
+    
+    await SpeechRecognition.requestPermissions();
+
+    await SpeechRecognition.start({
+      language: "en-US",
+      maxResults: 2,
+      prompt: "Say something",
+      partialResults: true,
+      popup: true,
+    });
+    
+    SpeechRecognition.addListener('partialResults', (result: any) => { 
+      const transcribedText = result.transcriptions[0];
+      console.log('Transcribed text:', transcribedText);
+    });
+
+  }
+
+
+  const stop = async () => {
+    await SpeechRecognition.stop();
+  }
 
   const updateAudioData = () => {
     if (analyzerRef.current) {

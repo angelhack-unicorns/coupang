@@ -113,7 +113,7 @@ export default function HomePage() {
         <div className='flex flex-col gap-4 p-2'>
           <p className='text-2xl'>내가 본 상품의 연관 상품</p>
           <div className='grid grid-cols-3 gap-1'>
-            {shopObjList.map((item, i) => (
+            {shopObjList.map((item) => (
               <div className='  flex flex-col gap-2'>
                 <div className='h-[10em] bg-green-200'></div>
                 <div>
