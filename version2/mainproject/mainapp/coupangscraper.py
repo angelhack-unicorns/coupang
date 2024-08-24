@@ -48,6 +48,11 @@ class CoupangScraper:
     print("started printing: ")
     for product_li in top_product_lis:
       a = product_li.find('a', recursive=False)
+
+      # gets the href of the product link
+      href = a.get('href')
+      product_url = f'https://www.coupang.com{href}'
+      
       dl = a.find('dl', recursie=False)
       img = dl.find('img')
       src = img.get('src')
@@ -66,6 +71,7 @@ class CoupangScraper:
       price = strong_price_value.get_text()
 
       image_urls.append({
+        "product_url": product_url,
         "src": src,
         "name": name,
         "price": price
@@ -77,3 +83,10 @@ class CoupangScraper:
     if page_content:
       return self.parse_products(page_content)
     return None
+
+def main():
+  coupang_scraper = CoupangScraper()
+  print(coupang_scraper.make_request("socks"))
+
+if __name__ == "__main__":
+  main()

@@ -1,6 +1,8 @@
 import base64
 from typing import Any
 
+import json
+
 from django.http import HttpRequest
 from pydantic import BaseModel
 
@@ -52,33 +54,27 @@ def hello(request):
 class AIRequestSchema(BaseModel):
   user_message: str
 
-@api.post("/ai", auth=FirebaseAuthBearer())
+@api.post("/user-message", auth=FirebaseAuthBearer())
 def ai(request, data: AIRequestSchema):
   user_request = request.auth
-  ai_response_json = openai_wrapper.send_prompt(data.user_message)
+  ai_response_json = openai_wrapper.handle_user_message(data.user_message)
   user_db = CustomUser.objects.get(email=user_request.email)
   user_db.user_prompt = data.user_message
   user_db.assistant_response = ai_response_json
   user_db.save()
-  return {"openai_response": ai_response_json}
-
-class ShopRequestSchema(BaseModel):
-  item: str
-
-@api.post("/shop")
-def shop(request, data: ShopRequestSchema):
-  shop_response = coupang_scraper.make_request(data.item)
-  return {"shop_response": shop_response}
+  ai_response = json.loads(ai_response_json)
+  return ai_response
 
 def encode_image_file(image_file: UploadedFile) -> str:
   return base64.b64encode(image_file.read()).decode("utf-8")
 
-@api.post("/image", auth=FirebaseAuthBearer())
+@api.post("/image-upload", auth=FirebaseAuthBearer())
 def upload_image(request, image: UploadedFile = File(...)):
   user_request = request.auth
   user_db = CustomUser.objects.get(email=user_request.email)
   if user_db.assistant_response == "":
     return {"error": "please send a message first"}
   base64_image = encode_image_file(image)
-  ai_response = openai_wrapper.send_image_with_user_prompt(base64_image, user_db.user_prompt, user_db.assistant_response)
-  return {"openai_response": ai_response}
+  ai_response_json = openai_wrapper.handle_image_upload(base64_image, user_db.user_prompt, user_db.assistant_response)
+  ai_response = json.loads(ai_response_json)
+  return ai_response

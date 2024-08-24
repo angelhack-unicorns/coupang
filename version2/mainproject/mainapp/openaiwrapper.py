@@ -15,9 +15,28 @@ arms, one item for shoulders, and etc. For the gym example,
 the completeness depends on if the most important parts of the 
 body that need to be trained in the gym by average gym members 
 are covered. You should reason in this way.
+
+Do not inlclude the same item twice. Dumbbels and barbells are
+the same item, for example. 
+
 reason_for_inclusion field explain why the item is important.
 For example, for the gym example, you should say that dumbbells
-are important because hands are important for many exercises.
+are important because they train multiple parts of the body
+that make you look bigger and stronger.
+
+The number of items you should include in your response should
+be 10.
+"""
+
+user_message_video = """
+This image is related to the previous prompt and the json response
+you returned. It shows what items I already have. You should 
+update your answer removing the items from your list that I 
+already have. And if possible, you should try to include 
+alternative items.
+
+The number of items you should include in your response should
+be 10.
 """
 
 class CatalogueItem(BaseModel):
@@ -34,7 +53,7 @@ class ImageDescription(BaseModel):
 class OpenAIWrapper:
   def __init__(self):
     self.client = OpenAI(api_key=API_KEY)
-  def send_prompt(self, user_message):
+  def handle_user_message(self, user_message):
     completion = self.client.beta.chat.completions.parse(
       model="gpt-4o-2024-08-06",
       messages=[
@@ -64,22 +83,22 @@ class OpenAIWrapper:
       response_format=ImageDescription,
     )
     return completion.choices[0].message.content
-  def send_image_with_user_prompt(
+  def handle_image_upload(
     self, 
     image_base64,
     user_message, 
-    assistant_response
+    assistant_message
   ):
     completion = self.client.beta.chat.completions.parse(
       model="gpt-4o-2024-08-06",
       messages=[
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_message},
-        {"role": "assistant", "content": assistant_response},
+        {"role": "assistant", "content": assistant_message},
         {"role": "user", "content": [
           {
             "type": "text",
-            "text": "this image is related to the previuos prompt. it shows what items i already have. you should update your answer removing the items from your list that i already have."
+            "text": user_message_video
           },
           {
             "type": "image_url",
@@ -89,6 +108,13 @@ class OpenAIWrapper:
           }
         ]}
       ],
-      response_format=ImageDescription,
+      response_format=CatalogueItems,
     )
     return completion.choices[0].message.content
+  
+def main():
+  openai_wrapper = OpenAIWrapper()
+  print(openai_wrapper.handle_user_message("I need to buy equipment for my in-house gym."))
+
+if __name__ == "__main__":
+  main()
