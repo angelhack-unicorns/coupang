@@ -38,6 +38,9 @@ export default function VoicePage() {
   const toggleListening = async () => {
     if (isListening) {
       setIsLoading(true);
+      stopListening();
+      setIsListening(false);
+
       try {
         await submitMessage.mutateAsync(text);
       } catch (error) {
@@ -47,6 +50,7 @@ export default function VoicePage() {
       }
     } else {
       startListening();
+      setIsListening(true);
     }
     setIsListening(!isListening);
   };
@@ -54,7 +58,7 @@ export default function VoicePage() {
   return (
     <>
       <div className='flex items-center justify-center'>
-        <XMarkIcon className=''/>
+        <XMarkIcon className='' />
         <CoupangLogoImage />
       </div>
       <div className='flex flex-col justify-between h-full bg-white'>
