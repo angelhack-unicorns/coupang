@@ -11,7 +11,7 @@ export default function CameraIcon(props: SVGProps<SVGSVGElement>) {
     >
       <g
         fill='none'
-        stroke='white'
+        stroke='black'
         strokeLinecap='round'
         strokeLinejoin='round'
         strokeWidth={1.95}
