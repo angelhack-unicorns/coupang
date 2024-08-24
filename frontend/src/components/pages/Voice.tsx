@@ -9,19 +9,24 @@ export default function Voice() {
     const [rad, setRad] = useState<string>('80');
 
     //change to true for cart
-    const [isCart, seICart] = useState<boolean>(false);
+    const [isCart, setIsCart] = useState<boolean>(false);
 
     //update radius based on voice amplitude in the future
     useEffect(() => {
         setTimeout(() => {
             if (rad === '80') {
-                setRad('50');
+                setRad('70');
             }
             else {
                 setRad('80');
             }
         }, 1000)
     }, [rad])
+
+    const handleCart = ((e: any) => {
+        e.preventDefault();
+        setIsCart(prev => !prev);
+    })
     return (
 
         <main className='grid grid-cols-3 grid-rows-12 header-image h-screen'>
@@ -36,8 +41,7 @@ export default function Voice() {
             </div>
 
             <div className="flex col-span-full row-span-6 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 justify-center overflow-auto">
-                {!isCart ? <div className={`flex bg-white rounded-full aspect-square w-[${rad}%] m-auto`} >
-                </div> : <VoiceCart />}
+                {!isCart ? <div className="flex bg-white rounded-full aspect-square m-auto" style={{ width: `${rad}%` }} ></div> : <VoiceCart />}
             </div>
             <div className="flex col-span-full row-span-3 items-center justify-center">
                 <p> No Problem! Please provide me a picture.</p>
@@ -50,7 +54,7 @@ export default function Voice() {
                     <div className="flex text-center items-center justify-center">
                         <p>Listening...</p>
                     </div>
-                    <button className="active:opacity-50">
+                    <button className="active:opacity-50" onClick={(e) => handleCart(e)}>
                         <img src='cameraBg.png' className="" />
                     </button>
                 </div>
