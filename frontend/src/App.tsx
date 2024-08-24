@@ -4,7 +4,7 @@ import Layout from './pages/Layout';
 import HomePage from './pages/Home';
 import VoicePage from './pages/Voice';
 import TestPage from './pages/Test';
-
+import LoginPage from './pages/Home'
 const queryClient = new QueryClient();
 
 export default function App() {
