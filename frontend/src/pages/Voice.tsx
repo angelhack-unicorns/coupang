@@ -45,28 +45,28 @@ export default function VoicePage() {
     await SpeechRecognition.stop();
   };
 
-
   return (
     <>
       <VoiceNav />
       <div className='flex flex-col justify-between h-full bg-white'>
-        {isListening ? (!isCart ?
-          <>
-            <AudioPlaceholder />
-            <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
-              <text className='text-black mb-4 font-inter font-light'>
-                {text}
-              </text>
-              <Button
-                shape='circle'
-                className='w-16 h-16 bg-[#3369FD]'
-                onPress={() => setIsListening(!isListening)}
-              >
-                {isListening ? <PauseIcon /> : <PlayIcon />}
-              </Button>
-            </div>
-          </>
-          : (
+        {isListening ? (
+          !isCart ? (
+            <>
+              <AudioPlaceholder />
+              <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
+                <text className='text-black mb-4 font-inter font-light'>
+                  {text}
+                </text>
+                <Button
+                  shape='circle'
+                  className='w-16 h-16 bg-[#3369FD]'
+                  onPress={() => setIsListening(!isListening)}
+                >
+                  {isListening ? <PauseIcon /> : <PlayIcon />}
+                </Button>
+              </div>
+            </>
+          ) : (
             <>
               <CartContainer />
               <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
@@ -81,10 +81,11 @@ export default function VoicePage() {
                   {isListening ? <PauseIcon /> : <PlayIcon />}
                 </Button>
               </div>
-            </>))
-          : (
-            <CameraComponent />
-          )}
+            </>
+          )
+        ) : (
+          <CameraComponent />
+        )}
       </div>
     </>
   );
