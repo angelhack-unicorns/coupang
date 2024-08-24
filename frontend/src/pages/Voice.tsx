@@ -9,10 +9,11 @@ import CartContainerSkeleton from '../components/CartContainerSkeleton';
 import CoupangLogoImage from '../components/VoiceNav';
 import { useSpeechRecognition } from '../api/useSpeechRecognition';
 import { useSubmitUserMessage } from '../api/fetch-scraper-data';
-import 'ldrs/mirage';
+// import 'ldrs/mirage';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
 import { useNavigate } from 'react-router-dom';
 import AudioRecommendations from './AudioRecommendations';
+import Spinner from '../components/ui/spinner';
 
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
@@ -61,15 +62,14 @@ export default function VoicePage() {
   return (
     <>
       <div className='grid grid-cols-3'>
-
-        <button onClick={() => navigate("/")} className="ml-5">
+        <button onClick={() => navigate('/')} className='ml-5'>
           <XMarkIcon className='' />
         </button>
 
         <CoupangLogoImage />
       </div>
       <div className='flex flex-col justify-between h-full bg-white'>
-        {isListening ||!submitMessage.data?.items ? (
+        {isListening || !submitMessage.data?.items ? (
           <AudioPlaceholder />
         ) : (
           <AudioRecommendations items={submitMessage.data?.items} />
@@ -87,7 +87,8 @@ export default function VoicePage() {
           >
             {isLoading ? (
               // @ts-ignore
-              <l-mirage size='60' speed='2.5' color='white'></l-mirage>
+              // <l-mirage size='60' speed='2.5' color='white'></l-mirage>
+              <Spinner />
             ) : isListening ? (
               <PauseIcon />
             ) : (
