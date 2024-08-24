@@ -11,11 +11,10 @@ export default function Navbar() {
   const location = useLocation();
   const isVoicePage = location.pathname === '/voice';
 
-  const navbarClass = `fixed bottom-0 left-0 w-full flex justify-between items-center p-4 ${
-    isVoicePage ? 'bg-black' : 'bg-white'
-  }`;
+  const navbarClass = `fixed bottom-0 left-0 w-full flex justify-between items-center p-4 ${isVoicePage ? 'bg-white' : 'bg-white'
+    }`;
 
-  const iconClass = isVoicePage ? 'text-neutral-300' : 'text-black';
+  const iconClass = isVoicePage ? 'text-black' : 'text-black';
 
   return (
     <footer className={navbarClass}>

@@ -4,6 +4,7 @@ import PauseIcon from '../components/ui/icons/PauseIcon';
 import PlayIcon from '../components/ui/icons/PlayIcon';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
+import VoiceNav from '../components/VoiceNav';
 
 interface BouncingDotsProps {
   audioData: Uint8Array;
@@ -43,7 +44,7 @@ export default function VoicePage() {
 
 
   const listen = async () => {
-    
+
     await SpeechRecognition.requestPermissions();
 
     await SpeechRecognition.start({
@@ -53,8 +54,8 @@ export default function VoicePage() {
       partialResults: true,
       popup: true,
     });
-    
-    SpeechRecognition.addListener('partialResults', (result: any) => { 
+
+    SpeechRecognition.addListener('partialResults', (result: any) => {
       const transcribedText = result.transcriptions[0];
       console.log('Transcribed text:', transcribedText);
     });
@@ -76,21 +77,24 @@ export default function VoicePage() {
   };
 
   return (
-    <div className='flex flex-col justify-between h-full'>
-      <div className='flex justify-around w-full absolute bottom-32'>
-        <Button
-          intent='light/dark'
-          shape='circle'
-          className='w-16 h-16'
-          onPress={() => setIsListening(!isListening)}
-        >
-          {isListening ? <PauseIcon /> : <PlayIcon />}
-        </Button>
-        <BouncingDots audioData={audioData} />
-        <Button intent='danger' shape='circle' className='w-16 h-16'>
-          <XMarkIcon />
-        </Button>
+    <>
+      <VoiceNav />
+      <div className='flex flex-col justify-between h-full'>
+        <div className='flex justify-around w-full absolute bottom-32'>
+          <Button
+            // intent='light/dark'
+            shape='circle'
+            className='w-16 h-16 bg-[#3369FD]'
+            onPress={() => setIsListening(!isListening)}
+          >
+            {isListening ? <PauseIcon /> : <PlayIcon />}
+          </Button>
+          <BouncingDots audioData={audioData} />
+          <Button intent='danger' shape='circle' className='w-16 h-16'>
+            <XMarkIcon />
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
