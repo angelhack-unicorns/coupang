@@ -50,13 +50,11 @@ export default function VoicePage() {
       <VoiceNav />
       <div className='flex flex-col justify-between h-full bg-white'>
         {isListening ? (
-          !isCart ? (
+          isCart ? (
             <>
-              <AudioPlaceholder />
+              <CartContainer />
               <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
-                <text className='text-black mb-4 font-inter font-light'>
-                  {text}
-                </text>
+                <p className='text-black mb-4 font-inter font-light'>{text}</p>
                 <Button
                   shape='circle'
                   className='w-16 h-16 bg-[#3369FD]'
@@ -68,7 +66,7 @@ export default function VoicePage() {
             </>
           ) : (
             <>
-              <CartContainer />
+              <AudioPlaceholder />
               <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
                 <text className='text-black mb-4 font-inter font-light'>
                   {text}
