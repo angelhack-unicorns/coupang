@@ -3,8 +3,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Layout from './pages/Layout';
 import HomePage from './pages/Home';
 import VoicePage from './pages/Voice';
-import TestPage from './pages/Test';
-import LoginPage from './pages/Home'
+// import TestPage from './pages/Test';
+import LoginPage from './pages/Home';
+import TestRecommendationsPage from './pages/TestRecommendations';
+
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -21,14 +23,18 @@ export default function App() {
           path: '/voice',
           element: <VoicePage />,
         },
-        {
-          path: '/test',
-          element: <TestPage />,
-        },
+        // {
+        //   path: '/test',
+        //   element: <TestPage />,
+        // },
         {
           path: '/login',
-          element: <LoginPage />
-        }
+          element: <LoginPage />,
+        },
+        {
+          path: '/testrecommendations',
+          element: <TestRecommendationsPage />,
+        },
       ],
     },
   ]);
