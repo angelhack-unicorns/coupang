@@ -11,7 +11,7 @@ export default function XMarkIcon(props: SVGProps<SVGSVGElement>) {
     >
       <path
         fill='none'
-        stroke='#ffffff'
+        stroke='black'
         strokeLinecap='round'
         strokeLinejoin='round'
         strokeWidth={1.95}

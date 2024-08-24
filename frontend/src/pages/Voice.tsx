@@ -10,6 +10,7 @@ import CoupangLogoImage from '../components/VoiceNav';
 import { useSpeechRecognition } from '../api/useSpeechRecognition';
 import { useSubmitUserMessage } from '../api/fetch-scraper-data';
 import 'ldrs/mirage';
+import XMarkIcon from '../components/ui/icons/XMarkIcon';
 
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
@@ -52,7 +53,10 @@ export default function VoicePage() {
 
   return (
     <>
-      <CoupangLogoImage />
+      <div className='flex items-center justify-center'>
+        <XMarkIcon className=''/>
+        <CoupangLogoImage />
+      </div>
       <div className='flex flex-col justify-between h-full bg-white'>
         {isListening ? (
           isCart ? (
