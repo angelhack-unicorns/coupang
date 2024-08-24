@@ -1,11 +1,12 @@
 
 import { useState, useRef } from 'react'
 import Webcam from 'react-webcam'
+import { Button } from './ui';
+import CameraIcon from './ui/icons/CameraIcon';
 
 export default function CameraComponent() {
   const webcamRef = useRef(null);
   const [camDirection, setCameraDirection] = useState("user")
-  const [isRecording, setIsRecording] = useState(false)
 
   const videoConstraints = {
     facingMode: camDirection,
@@ -15,11 +16,13 @@ export default function CameraComponent() {
 
 
   return (
-    <div className='flex flex-col'>
+    <>
       <Webcam style={{ borderRadius: '0%' }} audio={false} ref={webcamRef} videoConstraints={videoConstraints}></Webcam>
-      <button
-        className='btn bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50'
-        onClick={() => {
+      <div className='flex flex-col items-center justify-center w-full absolute bottom-32'> 
+      <Button
+        shape='circle'
+        className='w-16 h-16 bg-[#3369FD]'
+        onPress={() => {
           const imageSrc = webcamRef.current.getScreenshot();
           fetch(imageSrc)
             .then(res => res.blob())
@@ -47,10 +50,11 @@ export default function CameraComponent() {
               //     navigate("/negative")
               //   })
             })
-        }}>
-        take photo
-      </button>
-
-    </div>
+        }}
+      >
+        <CameraIcon />
+      </Button>
+      </div>
+    </>
   )
 }
