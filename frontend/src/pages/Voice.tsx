@@ -2,20 +2,18 @@ import { useState, useEffect } from 'react';
 import { Button } from '../components/ui';
 import PauseIcon from '../components/ui/icons/PauseIcon';
 import PlayIcon from '../components/ui/icons/PlayIcon';
-import XMarkIcon from '../components/ui/icons/XMarkIcon';
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import VoiceNav from '../components/VoiceNav';
 import CameraComponent from '../components/CameraComponent';
 import AudioPlaceholder from '../components/ui/audioPlaceholder';
 
-
 export default function VoicePage() {
   const [isListening, setIsListening] = useState(true);
-  const [text, setText] = useState<string>()
+  const [text, setText] = useState<string>('Listening...');
 
   useEffect(() => {
     if (isListening) {
-      console.log("is listening");
+      console.log('is listening');
       listen();
     } else {
       stop();
@@ -36,7 +34,7 @@ export default function VoicePage() {
 
     SpeechRecognition.addListener('partialResults', (result: any) => {
       const transcribedText = result.transcriptions[0];
-      setText(transcribedText)
+      setText(transcribedText);
       console.log('Transcribed text:', transcribedText);
     });
   };
@@ -45,16 +43,17 @@ export default function VoicePage() {
     await SpeechRecognition.stop();
   };
 
- 
-
   return (
     <>
       <VoiceNav />
       <div className='flex flex-col justify-between h-full bg-white'>
-        {isListening ?
+        {isListening ? (
           <>
             <AudioPlaceholder />
-            <div className='flex justify-around w-full items-center absolute bottom-32'>
+            <div className='flex flex-col items-center justify-center w-full absolute bottom-32'>
+              <text className='text-black mb-4 font-inter font-light'>
+                {text}
+              </text>
               <Button
                 shape='circle'
                 className='w-16 h-16 bg-[#3369FD]'
@@ -62,24 +61,15 @@ export default function VoicePage() {
               >
                 {isListening ? <PauseIcon /> : <PlayIcon />}
               </Button>
-              <div>
-                <text className='text-black mt-18 font-inter font-light'>Listening..</text>
-              </div>
-              <Button intent='danger' shape='circle' className='w-16 h-16'>
-                <XMarkIcon/>
-              </Button>
             </div>
           </>
-          :
+        ) : (
           <CameraComponent />
-        }
+        )}
       </div>
     </>
   );
 }
-
-
-
 
 // const updateAudioData = () => {
 //   if (analyzerRef.current) {
@@ -89,7 +79,6 @@ export default function VoicePage() {
 //     animationRef.current = requestAnimationFrame(updateAudioData);
 //   }
 // };
-
 
 // const BouncingDots: React.FC<BouncingDotsProps> = ({ audioData }) => {
 //   return (
