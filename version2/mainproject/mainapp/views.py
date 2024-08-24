@@ -23,7 +23,7 @@ class AIRequestSchema(BaseModel):
 @api.post("/user-message")
 def ai(request, data: AIRequestSchema):
   ai_response_json = openai_wrapper.handle_user_message(data.user_message)
-  user_db = CustomUser.objects.get(email=default_user.email)
+  user_db = CustomUser.objects.get(email=default_user["email"])
   user_db.user_message = data.user_message
   user_db.assistant_message = ai_response_json
   user_db.save()
@@ -35,7 +35,7 @@ def encode_image_file(image_file: UploadedFile) -> str:
 
 @api.post("/image-upload")
 def upload_image(request, image: UploadedFile = File(...)):
-  user_db = CustomUser.objects.get(email=default_user.email)
+  user_db = CustomUser.objects.get(email=default_user["email"])
   if user_db.assistant_message == "":
     return {"error": "please send a message first"}
   base64_image = encode_image_file(image)
