@@ -38,7 +38,8 @@ interface ProductInfo {
 }
 
 const getPageContent = async (url: string): Promise<string> => {
-  const response = await fetch(url, { headers });
+  const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  const response = await fetch(corsProxyUrl + url, { headers });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }

@@ -5,6 +5,7 @@ import PlayIcon from '../components/ui/icons/PlayIcon';
 import XMarkIcon from '../components/ui/icons/XMarkIcon';
 import { SpeechRecognition } from '@capacitor-community/speech-recognition';
 import VoiceNav from '../components/VoiceNav';
+import CameraIcon from '../components/ui/icons/CameraIcon';
 
 interface BouncingDotsProps {
   audioData: Uint8Array;
@@ -34,23 +35,20 @@ export default function VoicePage() {
 
   useEffect(() => {
     if (isListening) {
-      listen()
-
+      listen();
     } else {
-      stop()
+      stop();
     }
     // return () => stop(); //stoplistening
   }, [isListening]);
 
-
   const listen = async () => {
-
     await SpeechRecognition.requestPermissions();
 
     await SpeechRecognition.start({
-      language: "en-US",
+      language: 'en-US',
       maxResults: 2,
-      prompt: "Say something",
+      prompt: 'Say something',
       partialResults: true,
       popup: true,
     });
@@ -59,13 +57,11 @@ export default function VoicePage() {
       const transcribedText = result.transcriptions[0];
       console.log('Transcribed text:', transcribedText);
     });
-
-  }
-
+  };
 
   const stop = async () => {
     await SpeechRecognition.stop();
-  }
+  };
 
   const updateAudioData = () => {
     if (analyzerRef.current) {
@@ -80,6 +76,12 @@ export default function VoicePage() {
     <>
       <VoiceNav />
       <div className='flex flex-col justify-between h-full'>
+        {/* AI Section */}
+        <div className='h-96 w-full rounded-t-3xl bg-gradient-to-b from-[#45D9FA] to-[#88CC2E] flex justify-end p-4'>
+          <CameraIcon />
+        </div>
+
+        {/* bottom control buttons */}
         <div className='flex justify-around w-full absolute bottom-32'>
           <Button
             // intent='light/dark'
