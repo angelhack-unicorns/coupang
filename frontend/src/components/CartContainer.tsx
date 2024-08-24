@@ -3,36 +3,36 @@ import BackButton from './ui/icons/BackButton';
 import CameraIcon from './ui/icons/CameraIcon';
 
 export default function CartContainer() {
-  //   const dataArr = [
-  //     {
-  //       im: null,
-  //       name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트',
-  //       discountPerc: '13%',
-  //       origPrice: '45,750원',
-  //       newPrice: '39,000원',
-  //       delivBy: '내일(월) 도착 보장',
-  //     },
-  //     {
-  //       name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트',
-  //       discountPerc: '13%',
-  //       origPrice: '45,750원',
-  //       newPrice: '39,000원',
-  //       delivBy: '내일(월) 도착 보장',
-  //     },
-  //     {
-  //       name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트',
-  //       discountPerc: '13%',
-  //       origPrice: '45,750원',
-  //       newPrice: '39,000원',
-  //       delivBy: '내일(월) 도착 보장',
-  //     },
-  //   ];
+    //   const dataArr = [
+    //     {
+    //       im: null,
+    //       name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트',
+    //       discountPerc: '13%',
+    //       origPrice: '45,750원',
+    //       newPrice: '39,000원',
+    //       delivBy: '내일(월) 도착 보장',
+    //     },
+    //     {
+    //       name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트',
+    //       discountPerc: '13%',
+    //       origPrice: '45,750원',
+    //       newPrice: '39,000원',
+    //       delivBy: '내일(월) 도착 보장',
+    //     },
+    //     {
+    //       name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트',
+    //       discountPerc: '13%',
+    //       origPrice: '45,750원',
+    //       newPrice: '39,000원',
+    //       delivBy: '내일(월) 도착 보장',
+    //     },
+    //   ];
 
     let text = "\ucf54\uba67 \uc2a4\ud3ec\uce20 \ub77c\ud14d\uc2a4 \ub8e8\ud504\ubc34\ub4dc 5\uc885 \uc138\ud2b8, \ud551\ud06c, \uc624\ub80c\uc9c0, \ud53c\uce58, \ub85c\uc988, \ud37c\ud50c, 1\uc138\ud2b8"
     console.log(unicodeToChar(text));
 
     const dataArr = [
-        { im: null, name:"이즈휴 리모콘 간접 무드등 히든 줄조명 M4", discountPerc: '13%', origPrice: "45,750원", newPrice: '39,000원', delivBy: '내일(월) 도착 보장' }, { name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트', discountPerc: '13%', origPrice: "45,750원", newPrice: '39,000원', delivBy: '내일(월) 도착 보장' }, 
+        { im: null, name: "이즈휴 리모콘 간접 무드등 히든 줄조명 M4", discountPerc: '13%', origPrice: "45,750원", newPrice: '39,000원', delivBy: '내일(월) 도착 보장' }, { name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트', discountPerc: '13%', origPrice: "45,750원", newPrice: '39,000원', delivBy: '내일(월) 도착 보장' },
         { name: '이즈휴 리모콘 간접 무드등 히든 줄조명 M4, 웜화이트', discountPerc: '13%', origPrice: "45,750원", newPrice: '39,000원', delivBy: '내일(월) 도착 보장' }
     ]
 
@@ -46,10 +46,9 @@ export default function CartContainer() {
             <div className="h-96 overflow-auto space-y-2">
                 {dataArr.map((item, i) => (
                     <>
-                    <CartItem {...item}/>
-                    <hr className="my-12 h-0.5 border-t-0 bg-neutral-200 dark:bg-white/10" />
+                        <CartItem {...item} />
+                        <hr className="my-12 h-0.5 border-t-0 bg-neutral-200 dark:bg-white/10" />
                     </>
-
                 ))}
             </div>
             <hr className="my-0 h-0.5 border-t-0 bg-neutral-300 dark:bg-white/10" />
@@ -60,7 +59,7 @@ export default function CartContainer() {
 
 
 
- const dummy = {
+const dummy = {
     "items": [{
         "name": "adjustable dumbbells",
         "category": "Weights",
