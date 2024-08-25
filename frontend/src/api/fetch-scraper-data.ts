@@ -41,6 +41,32 @@ export const useSubmitUserMessage = () => {
   });
 };
 
+export const useSubmitUserVideo = () => {
+  return useMutation<UserMessageResponse, Error, string>({
+    mutationFn: async (userVideo: any) => {
+      const formData = new FormData();
+      formData.append('image', userVideo);
+      const response = await fetch(
+        'http://43.203.223.170/api/e9dyi1qp04w57b5q98hwmwx8/image-upload',
+        {
+          method: 'POST',
+          headers: {
+            // 'Content-Type': 'multipart/form-data',
+          },
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to submit user message');
+      }
+
+      return response.json();
+    },
+  });
+};
+
+
 // example output:
 /*
 export const response = {
