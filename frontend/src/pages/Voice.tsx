@@ -4,7 +4,6 @@ import PauseIcon from '../components/ui/icons/PauseIcon';
 import PlayIcon from '../components/ui/icons/PlayIcon';
 // import CameraComponent from '../components/CameraComponent';
 import AudioPlaceholder from '../components/ui/audioPlaceholder';
-import CartContainer from '../components/CartContainer';
 import CartContainerSkeleton from '../components/CartContainerSkeleton';
 import CoupangLogoImage from '../components/VoiceNav';
 import { useSpeechRecognition } from '../api/useSpeechRecognition';
